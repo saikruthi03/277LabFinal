@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SJSUMap</string>
+    <string name="action_settings">Settings</string>
+    <string name="o">o</string>
+    <string name="title_activity_building">BuildingActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+</resources>

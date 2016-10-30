@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/layout"
+    tools:context="com.example.vsaik.sjsumap.MapActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <AutoCompleteTextView
+                android:id="@+id/searchEditText"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Building Name"></AutoCompleteTextView>
+
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:transitionName="Search"
+                />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="50dp"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:alpha="0.7"
+            android:src="@drawable/campusmap"
+            android:adjustViewBounds="true"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView1"
+            android:id="@+id/location"
+            android:elevation="0dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/location"
+            android:id="@+id/locationtrans"
+            android:elevation="0dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pin"
+            android:layout_alignTop="@+id/locationtrans"
+            android:elevation="0dp"/>
+
+
+       <Button
+           style="?android:attr/buttonStyleSmall"
+           android:text=""
+           android:background="@android:color/transparent"
+           android:id="@+id/button1"
+           android:layout_marginStart="38dp"
+           android:layout_height="60dp"
+           android:layout_width="30dp"
+           android:layout_below="@+id/location"
+           android:layout_toEndOf="@+id/location"
+           android:layout_marginTop="96dp" />
+
+       <Button
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="60dp"
+           android:layout_height="60dp"
+           android:background="@android:color/transparent"
+           android:text=""
+           android:id="@+id/button2"
+           android:layout_alignTop="@+id/button1"
+           android:layout_toEndOf="@+id/button3"
+           android:layout_marginStart="119dp" />
+
+       <Button
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="32dp"
+           android:layout_height="42dp"
+           android:background="@android:color/transparent"
+           android:text=""
+           android:id="@+id/button3"
+           android:layout_marginTop="62dp"
+           android:layout_below="@+id/button2"
+           android:layout_alignStart="@+id/button1" />
+
+       <Button
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="95dp"
+           android:layout_height="38dp"
+           android:background="@android:color/transparent"
+           android:text=""
+           android:id="@+id/button4"
+           android:layout_below="@+id/button2"
+           android:layout_alignStart="@+id/button2" />
+
+       <Button
+           style="?android:attr/buttonStyleSmall"
+           android:layout_width="40dp"
+           android:background="@android:color/transparent"
+           android:layout_height="30dp"
+           android:text=""
+           android:id="@+id/button5"
+           android:layout_below="@+id/button4"
+           android:layout_toEndOf="@+id/button4"
+           android:layout_marginStart="18dp" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="80dp"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/button6"
+            android:layout_marginBottom="25dp"
+            android:layout_alignBottom="@+id/imageView1"
+            android:layout_toStartOf="@+id/button4" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email"
+        app:backgroundTint="@android:color/black" />
+
+
+</android.support.design.widget.CoordinatorLayout>
