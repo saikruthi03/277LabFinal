@@ -32,6 +32,7 @@
                 android:layout_height="40dp"
                 android:clickable="true"
                 android:transitionName="Search"
+                android:background="@drawable/search"
                 />
         </android.support.v7.widget.Toolbar>
 
@@ -97,8 +98,8 @@
            android:text=""
            android:id="@+id/button2"
            android:layout_alignTop="@+id/button1"
-           android:layout_toEndOf="@+id/button3"
-           android:layout_marginStart="119dp" />
+           android:layout_toStartOf="@+id/button5"
+           android:layout_marginEnd="55dp" />
 
        <Button
            style="?android:attr/buttonStyleSmall"
@@ -107,9 +108,8 @@
            android:background="@android:color/transparent"
            android:text=""
            android:id="@+id/button3"
-           android:layout_marginTop="62dp"
-           android:layout_below="@+id/button2"
-           android:layout_alignStart="@+id/button1" />
+           android:layout_below="@+id/button5"
+           android:layout_alignEnd="@+id/button1" />
 
        <Button
            style="?android:attr/buttonStyleSmall"
@@ -129,8 +129,9 @@
            android:text=""
            android:id="@+id/button5"
            android:layout_below="@+id/button4"
-           android:layout_toEndOf="@+id/button4"
-           android:layout_marginStart="18dp" />
+           android:layout_alignEnd="@+id/imageView1"
+           android:layout_marginEnd="35dp"
+           android:layout_marginTop="30dp" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -148,14 +149,6 @@
 
 </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"
-        app:backgroundTint="@android:color/black" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,8 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -36,8 +33,11 @@ public class BuildingActivity extends AppCompatActivity  implements Result,Locat
     ImageView image;
     String address = null;
     Button button;
+    Button button1;
     String building = null;
     String buildingName = null;
+    String latitude = null;
+    String longitude = null;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,8 @@ public class BuildingActivity extends AppCompatActivity  implements Result,Locat
         address  = getIntent().getStringExtra("address");
         building = getIntent().getStringExtra("building");
         buildingName = getIntent().getStringExtra("buildingName");
+        latitude= getIntent().getStringExtra("latitude");
+        longitude=getIntent().getStringExtra("longitude");
         locationmanager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         String provider=LocationManager.GPS_PROVIDER;
         textview2 = (TextView) findViewById(R.id.buildingName);
@@ -69,8 +71,6 @@ public class BuildingActivity extends AppCompatActivity  implements Result,Locat
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.INTERNET},10);
-                location=locationmanager.getLastKnownLocation(provider);
-                locationmanager.requestLocationUpdates(provider,0,0,this);
                 return;
             }else{
                 location=locationmanager.getLastKnownLocation(provider);
@@ -79,29 +79,29 @@ public class BuildingActivity extends AppCompatActivity  implements Result,Locat
                 {
                     onLocationChanged(location);
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"location not found",Toast.LENGTH_LONG ).show();
-                }
+
             }
 
         }
-        else {
-            Toast.makeText(getApplicationContext(), "Provider is null", Toast.LENGTH_LONG).show();
-        }
+        button1=(Button) findViewById(R.id.mapButton);
         button = (Button) findViewById(R.id.streetViewButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
                     final Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://maps.google.com/maps?"
-                                    + "saddr=" + location.getLatitude() + "," + location.getLongitude() + "&daddr=" + address));
+                            Uri.parse("google.streetview:cbll="+latitude+","+longitude+"&cbp=1,99.56,,1,-5.27&mz=21"));
                     intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                     startActivity(intent);
-                }else{
+                }
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
                     final Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://maps.google.com/maps?"
-                                    + "saddr=" + address + "&daddr=" + address));
+                            Uri.parse("http://maps.google.com/maps?daddr=" + address));
                     intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                     startActivity(intent);
                 }
@@ -120,9 +120,7 @@ public class BuildingActivity extends AppCompatActivity  implements Result,Locat
             new DistanceResponse(BuildingActivity.this).execute(url1);
             onLocationChanged(location);
         }
-        else{
-            Toast.makeText(getApplicationContext(),"location not found",Toast.LENGTH_LONG ).show();
-        }
+
     }
 
     @Override
@@ -152,32 +150,28 @@ public class BuildingActivity extends AppCompatActivity  implements Result,Locat
 
         String res[]=result.get(0).split(",");
         if(!res[2].equals("") && res[2] != null) {
-           // if (res[2].equals("driving")) {
-             //   disDriv =Integer.parseInt(res[1]) / 1000 ;
-           //     durDriv =Double.parseDouble(res[0]) / 60 ;
-           // } else {
-                // textview1.setText(disDriv +" km");
-                textview2.setText(buildingName);
-                textview3.setText(Integer.parseInt(res[1])/1000 + " km");
-                Double durWalk = Double.parseDouble(res[0]) / 60;
-            Log.d("Distane",durWalk+"");
-                textview4.setText(df.format(durWalk) + "");
-                textview5.setText(address);
-                if(building != null && building.equals("1")){
-                    image.setImageResource(R.drawable.sjsulib);
-                }else if(building != null && building.equals("2")) {
-                    image.setImageResource(R.drawable.sjsueng);
-                }else if(building != null && building.equals("3")) {
-                    image.setImageResource(R.drawable.sjsuyhall);
-                }else if(building != null && building.equals("4")) {
-                    image.setImageResource(R.drawable.sjsusu);
-                }else if(building != null && building.equals("5")) {
-                    image.setImageResource(R.drawable.sjsubbbc);
-                }else if(building != null && building.equals("6")) {
-                    image.setImageResource(R.drawable.sjsusouthgarage);
+
+            textview2.setText(buildingName);
+            textview3.setText(Integer.parseInt(res[1])/1000 + " km");
+            Double durWalk = Double.parseDouble(res[0]) / 60;
+            textview4.setText(df.format(durWalk) + "");
+            textview5.setText(address);
+            if(building != null && building.equals("1")){
+                image.setImageResource(R.drawable.sjsulib);
+            }else if(building != null && building.equals("2")) {
+                image.setImageResource(R.drawable.sjsueng);
+            }else if(building != null && building.equals("3")) {
+                image.setImageResource(R.drawable.sjsuyhall);
+            }else if(building != null && building.equals("4")) {
+                image.setImageResource(R.drawable.sjsusu);
+            }else if(building != null && building.equals("5")) {
+                image.setImageResource(R.drawable.sjsubbbc);
+            }else if(building != null && building.equals("6")) {
+                image.setImageResource(R.drawable.sjsusouthgarage);
                 //}
             }
         }
 
     }
+
 }

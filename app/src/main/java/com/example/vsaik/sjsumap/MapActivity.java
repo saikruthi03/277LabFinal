@@ -74,6 +74,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 i.putExtra("address", addressData.getAddressList().get(0));
                 i.putExtra("building", "1");
                 i.putExtra("buildingName", "King Library");
+                i.putExtra("latitude", addressData.getGeoLat().get(0));
+                i.putExtra("longitude", addressData.getGeoLong().get(0));
                 startActivity(i);
             }
         });
@@ -87,6 +89,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 i.putExtra("address", addressData.getAddressList().get(1));
                 i.putExtra("building", "2");
                 i.putExtra("buildingName", "Engineering Building");
+                i.putExtra("latitude", addressData.getGeoLat().get(1));
+                i.putExtra("longitude", addressData.getGeoLong().get(1));
                 startActivity(i);
 
             }
@@ -100,6 +104,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 i.putExtra("address", addressData.getAddressList().get(2));
                 i.putExtra("building", "3");
                 i.putExtra("buildingName", "Yoshihiro Uchida Hall");
+                i.putExtra("latitude", addressData.getGeoLat().get(2));
+                i.putExtra("longitude", addressData.getGeoLong().get(2));
                 startActivity(i);
             }
         });
@@ -112,6 +118,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 i.putExtra("address", addressData.getAddressList().get(3));
                 i.putExtra("building", "4");
                 i.putExtra("buildingName", "Student Union");
+                i.putExtra("latitude", addressData.getGeoLat().get(3));
+                i.putExtra("longitude", addressData.getGeoLong().get(3));
                 startActivity(i);
             }
         });
@@ -124,6 +132,8 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 i.putExtra("address", addressData.getAddressList().get(4));
                 i.putExtra("building", "5");
                 i.putExtra("buildingName", "Boccardo Business Complex");
+                i.putExtra("latitude", addressData.getGeoLat().get(4));
+                i.putExtra("longitude", addressData.getGeoLong().get(4));
                 startActivity(i);
             }
         });
@@ -136,9 +146,12 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 i.putExtra("address", addressData.getAddressList().get(5));
                 i.putExtra("building", "6");
                 i.putExtra("buildingName", "South Parking Garage");
+                i.putExtra("latitude", addressData.getGeoLat().get(5));
+                i.putExtra("longitude", addressData.getGeoLong().get(5));
                 startActivity(i);
             }
         });
+
 
         Button searchButton = (Button) findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -147,53 +160,22 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 AutoCompleteTextView name1 = (AutoCompleteTextView) findViewById(R.id.searchEditText);
                 String name = name1.getText().toString();
                 Loc loc = null;
-                if (AddressData.hMap.containsKey(name.toUpperCase()))
-                    loc = AddressData.hMap.get(name.toUpperCase());
-                //if (loc != null)
-                    //showPin(loc.x, loc.y);
+                if(AddressData.hMap.containsKey(name.toUpperCase()))
+                    loc= AddressData.hMap.get(name.toUpperCase());
+                if(loc != null)
+                    showPin(loc.x,loc.y);
             }
         });
 
-       // ImageView pin = (ImageView) findViewById(R.id.pin);
-       /* pin.setX(330);
-        pin.setY(1060);*/
-       // pin.setX(500);
-       // pin.setY(1400);
-      //  pin.setBackgroundResource(R.drawable.pin);
-
     }
-
 
 
     private void showPin(int x,int y){
-      //  ImageView pin = (ImageView) findViewById(R.id.pin);
-        //pin.setX(x);
-        //pin.setY(y);
-      //  pin.setBackgroundResource(R.drawable.pin);
+        ImageView pin = (ImageView) findViewById(R.id.pin);
+        pin.setX(x);
+        pin.setY(y);
+        pin.setBackgroundResource(R.drawable.pin);
 
-    }
-
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_map, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-             int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void showMyLocation(){
@@ -213,8 +195,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
                 {
                     if((checkInCollege(location)))
                         transformCoordinates(location.getLatitude(),location.getLongitude());
-                    else
-                        Toast.makeText(getApplicationContext(),"out of college",Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"location not found",Toast.LENGTH_LONG ).show();
@@ -257,16 +238,17 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
             tranfX += 76.32320;
         }
 
-        //if(y > 37.33550) {
-        tranfY += 102.09841;
-
-        //}
-        /*else if( y > 37.33250) {
+        if(y > 37.33550) {
+            tranfY += 102.09841;
+            tranfX -= .00190;
+        }
+        else if( y > 37.33250) {
             tranfY += 102.09751;
+            //tranfX -= .00100;
         }
         else{
             tranfY += 102.09708;
-        }*/
+        }
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -326,13 +308,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
     }
     @Override
     public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults){
-        if(location!=null)
-        {
 
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"location not found", Toast.LENGTH_LONG ).show();
-        }
     }
 
     @Override
@@ -349,5 +325,7 @@ public class MapActivity extends AppCompatActivity implements LocationListener {
     @Override
     public void onProviderDisabled(String s) {
     }
+
+
 
 }

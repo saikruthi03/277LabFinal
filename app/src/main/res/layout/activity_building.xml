@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/DestAddressValue"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textSize="20dp" />
 
         <ImageView
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="Distnace:"
             android:id="@+id/walking"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             android:layout_below="@+id/buildingImage"/>
         <TextView
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="h"
             android:id="@+id/walking_value"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             android:layout_toEndOf="@+id/walking"
             android:layout_below="@+id/buildingImage"/>
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:text="Duration:"
             android:id="@+id/walking_dur"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             android:layout_below="@+id/walking"/>
 
@@ -84,26 +84,30 @@
             android:layout_height="wrap_content"
             android:text="h"
             android:id="@+id/walking_dur_value"
-            android:textColorHighlight="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textSize="15dp"
             android:layout_toEndOf="@+id/walking_dur"
             android:layout_below="@+id/walking_value"/>
 
+
+
     </RelativeLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/streetViewButton"
-        android:text="Open Street View"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/mapButton"
+        android:background="@drawable/maps"
         android:layout_marginTop="450dp"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/streetViewButton"
+        android:layout_toEndOf="@+id/mapButton"
+        android:background="@drawable/streetview"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="439dp"/>
+
 
 </android.support.design.widget.CoordinatorLayout>
